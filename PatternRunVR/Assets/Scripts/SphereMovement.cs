@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SphereMovement : MonoBehaviour {
 
-    bool didMovementStart = false;
+    bool startMovement = false;
+    bool movementInitated = false;
     Rigidbody rigidBody;
     SphereCollider sphereCollider;
     public float speed = 10f;
+    public Vector3 oppositeForce = new Vector3(-1, -1, -1);
 
 	// Use this for initialization
 	void Start () {
-        didMovementStart = true;
+        startMovement = true;
         rigidBody = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
 	}
@@ -22,16 +24,21 @@ public class SphereMovement : MonoBehaviour {
         rigidBody.AddForce(vector);
     }
 
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("TurnBox"))
         {
             Debug.Log("Hi");
-            if (rigidBody.velocity.x != 0)
+            if (true)
             {
                 Debug.Log("Hi Again");
+                var origVelocity = rigidBody.velocity;
                 rigidBody.velocity = Vector3.zero;
-                rigidBody.AddForce(new Vector3(0, 0, speed));
+                rigidBody.angularVelocity = Vector3.zero;
+                Debug.Log(origVelocity);
+                Debug.Log(Vector3.Cross(Vector3.down, origVelocity));
+                rigidBody.AddForce(Vector3.Cross(Vector3.down, origVelocity).normalized * speed);
             }
             
         }
@@ -41,11 +48,14 @@ public class SphereMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (didMovementStart && rigidBody.velocity.x == 0)
+		if (startMovement && !movementInitated)
         {
+            Debug.Log("Starts Movement");
             StartMovement();
+            movementInitated = true;
         }
+        
 
 
-	}
+    }
 }
