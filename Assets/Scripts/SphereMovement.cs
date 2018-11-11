@@ -34,6 +34,7 @@ public class SphereMovement : MonoBehaviour {
             {
                 Debug.Log("Hi Again");
                 var origVelocity = rigidBody.velocity;
+                var origAngularVelocity = rigidBody.angularVelocity;
                 rigidBody.velocity = Vector3.zero;
                 rigidBody.angularVelocity = Vector3.zero;
                 Debug.Log(origVelocity);
