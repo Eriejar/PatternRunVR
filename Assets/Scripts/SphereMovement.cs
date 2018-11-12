@@ -41,9 +41,8 @@ public class SphereMovement : MonoBehaviour {
                 Debug.Log(Vector3.Cross(Vector3.down, origVelocity));
                 rigidBody.AddForce(Vector3.Cross(Vector3.down, origVelocity).normalized * speed);
             }
-            
-        }
 
+        }    
         
     }
 
