@@ -5,6 +5,8 @@ using UnityEngine;
 public interface GenericSideMovement
 {
     void Move();
+    void AutoMoveLeft();
+    void AutoMoveRight();
 }
 
 public class FrontSideMovement : GenericSideMovement
@@ -22,6 +24,18 @@ public class FrontSideMovement : GenericSideMovement
     {
         float translation = Input.GetAxis("Horizontal") * speed;
         translation *= Time.deltaTime;
+        playerTransform.Translate(-translation, 0, 0);
+    }
+
+    public void AutoMoveLeft()
+    {
+        float translation = speed * Time.deltaTime;
+        playerTransform.Translate(-translation, 0, 0);
+    }
+
+    public void AutoMoveRight()
+    {
+        float translation = speed * Time.deltaTime;
         playerTransform.Translate(-translation, 0, 0);
     }
 }
@@ -43,6 +57,18 @@ public class LeftSideMovement : GenericSideMovement
         translation *= Time.deltaTime;
         playerTransform.Translate(0, 0, -translation);
     }
+
+    public void AutoMoveLeft()
+    {
+        float translation = speed * Time.deltaTime;
+        playerTransform.Translate(0, 0, translation);
+    }
+
+    public void AutoMoveRight()
+    {
+        float translation = speed * Time.deltaTime;
+        playerTransform.Translate(0, 0, -translation);
+    }
 }
 
 public class RightSideMovement : GenericSideMovement
@@ -62,6 +88,18 @@ public class RightSideMovement : GenericSideMovement
         translation *= Time.deltaTime;
         playerTransform.Translate(0, 0, translation);
     }
+
+    public void AutoMoveLeft()
+    {
+        float translation = speed * Time.deltaTime;
+        playerTransform.Translate(0, 0, -translation);
+    }
+
+    public void AutoMoveRight()
+    {
+        float translation = speed * Time.deltaTime;
+        playerTransform.Translate(0, 0, translation);
+    }
 }
 
 public class BackSideMovement : GenericSideMovement
@@ -79,6 +117,18 @@ public class BackSideMovement : GenericSideMovement
     {
         float translation = Input.GetAxis("Horizontal") * speed;
         translation *= Time.deltaTime;
+        playerTransform.Translate(translation, 0, 0);
+    }
+
+    public void AutoMoveLeft()
+    {
+        float translation = speed * Time.deltaTime;
+        playerTransform.Translate(-translation, 0, 0);
+    }
+
+    public void AutoMoveRight()
+    {
+        float translation = speed * Time.deltaTime;
         playerTransform.Translate(translation, 0, 0);
     }
 }

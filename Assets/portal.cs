@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class portal : MonoBehaviour {
-
+    public DestinationCube LeftToBottomTeleportCube;
 	// Use this for initialization
 	void Start () {
 
@@ -21,7 +21,7 @@ public class portal : MonoBehaviour {
         if(thingWithSide.currentSide == 3)
         {
             Debug.Log("Current Side 3 Teleport");
-            other.gameObject.transform.position = new Vector3(-3.87f, 0.13f, 3.21f);
+            other.gameObject.transform.position = LeftToBottomTeleportCube.getPosition();
             thingWithSide.SetSide(2);
             return;
         }
