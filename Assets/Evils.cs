@@ -5,8 +5,9 @@ using UnityEngine;
 public class Evils : MonoBehaviour {
 
     Player player;
-    private GenericSideMovement currentSideMovement;
-    public int currentSide;
+    private ISideMovement currentSideMovement;
+    public GameObject startingSide;
+    public GameObject currentSide;
     public float speed = 1f;
     private bool patrolMode = true;
     private bool followingPlayer = false;
@@ -15,13 +16,18 @@ public class Evils : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Mr.Cube").GetComponent<Player>();
-        currentSideMovement = new LeftSideMovement(speed, transform);
-        currentSide = 3;
+        currentSideMovement = SideMovementTools.GetSideMovement(startingSide, speed, transform);
         directionOfMovement = "left";
+        currentSide = startingSide;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (followingPlayer)
+        {
+            FollowPlayer();
+        }
+
 
         Move();
 	}
@@ -54,13 +60,37 @@ public class Evils : MonoBehaviour {
         {
             currentSideMovement.AutoMoveRight();
         }
+
     }
 
-     
-    void IsOnSamePlatformAsPlayer()
+
+    void FollowPlayer()
     {
-        var playerSide = player;
+        // Check if player is on same platform and if so change direction to follow it
+        var onSamePlatform = IsOnSamePlatformAsPlayer();
+        if (!onSamePlatform)
+        {
+            followingPlayer = false;
+            return;
+        }
+
+        if (onSamePlatform)
+        {
+
+        }
+        
     }
+     
+    bool IsOnSamePlatformAsPlayer()
+    {
+        if (currentSide == player.currentSide)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
 
     void SetMovementDirectionToPlayerSide()
     {
@@ -89,27 +119,7 @@ public class Evils : MonoBehaviour {
 
     void Patrol()
     {
-    }
 
-    public void SetSide(int side)
-    {
-        currentSide = side;
-
-        switch (side)
-        {
-            case 0:
-                currentSideMovement = new FrontSideMovement(speed, transform);
-                break;
-            case 1:
-                currentSideMovement = new RightSideMovement(speed, transform);
-                break;
-            case 2:
-                currentSideMovement = new BackSideMovement(speed, transform);
-                break;
-            case 3:
-                currentSideMovement = new LeftSideMovement(speed, transform);
-                break;
-        }
 
     }
 
