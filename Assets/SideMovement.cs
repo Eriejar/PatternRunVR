@@ -64,9 +64,33 @@ public class FrontSideMovement : ISideMovement
 
     public void Move()
     {
-        float translation = Input.GetAxis("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        playerTransform.Translate(-translation, 0, 0);
+        bool touching_left_side = false;
+        bool touching_right_side = false;
+        if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
+        {
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x < 0)
+            {
+                touching_left_side = true;
+            }
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x > 0)
+            {
+                touching_right_side = true;
+            }
+        }
+
+        float translation = 0;
+        if (touching_left_side == true || Input.GetKey("left"))
+        {
+            translation = speed * -1;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(-translation, 0, 0);
+        }
+        else if (touching_right_side == true || Input.GetKey("right"))
+        {
+            translation = speed;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(-translation, 0, 0);
+        }
     }
 
     public void AutoMoveLeft()
@@ -102,9 +126,33 @@ public class LeftSideMovement : ISideMovement
 
     public void Move()
     {
-        float translation = Input.GetAxis("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        playerTransform.Translate(0, 0, -translation);
+        bool touching_left_side = false;
+        bool touching_right_side = false;
+        if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
+        {
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x < 0)
+            {
+                touching_left_side = true;
+            }
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x > 0)
+            {
+                touching_right_side = true;
+            }
+        }
+
+        float translation = 0;
+        if (touching_left_side == true || Input.GetKey("left"))
+        {
+            translation = speed * -1;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(0, 0, -translation);
+        }
+        else if (touching_right_side == true || Input.GetKey("right"))
+        {
+            translation = speed;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(0, 0, -translation);
+        }
     }
 
     public void AutoMoveLeft()
@@ -140,9 +188,33 @@ public class RightSideMovement : ISideMovement
 
     public void Move()
     {
-        float translation = Input.GetAxis("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        playerTransform.Translate(0, 0, translation);
+        bool touching_left_side = false;
+        bool touching_right_side = false;
+        if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
+        {
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x < 0)
+            {
+                touching_left_side = true;
+            }
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x > 0)
+            {
+                touching_right_side = true;
+            }
+        }
+
+        float translation = 0;
+        if (touching_left_side == true || Input.GetKey("left"))
+        {
+            translation = speed * -1;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(0, 0, translation);
+        }
+        else if (touching_right_side == true || Input.GetKey("right"))
+        {
+            translation = speed;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(0, 0, translation);
+        }      
     }
 
     public void AutoMoveLeft()
@@ -178,9 +250,33 @@ public class BackSideMovement : ISideMovement
 
     public void Move()
     {
-        float translation = Input.GetAxis("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        playerTransform.Translate(translation, 0, 0);
+        bool touching_left_side = false;
+        bool touching_right_side = false;
+        if (OVRInput.Get(OVRInput.Touch.PrimaryTouchpad))
+        {
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x < 0)
+            {
+                touching_left_side = true;
+            }
+            if (OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad).x > 0)
+            {
+                touching_right_side = true;
+            }
+        }
+
+        float translation = 0;
+        if (touching_left_side == true || Input.GetKey("left"))
+        {
+            translation = speed * -1;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(translation, 0, 0);
+        }
+        else if (touching_right_side == true || Input.GetKey("right"))
+        {
+            translation = speed;
+            translation *= Time.deltaTime;
+            playerTransform.Translate(translation, 0, 0);
+        }
     }
 
     public void AutoMoveLeft()

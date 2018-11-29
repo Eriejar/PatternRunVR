@@ -10,7 +10,8 @@ public class Player : MonoBehaviour {
 
     [HideInInspector]
     public GameObject currentSide;
-    private ISideMovement currentSideMovement;
+    [HideInInspector]
+    public ISideMovement currentSideMovement;
     private Rigidbody rb;
 
     // Use this for initialization
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour {
 
         currentSideMovement.Move();
 
-        if (Input.GetButtonDown("Jump"))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad) || Input.GetButtonDown("Jump"))
         {
             Debug.Log("Jumping!");
             PlayerJump();

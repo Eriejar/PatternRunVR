@@ -5,7 +5,8 @@ using UnityEngine;
 public class Evils : MonoBehaviour {
 
     Player player;
-    private ISideMovement currentSideMovement;
+    [HideInInspector]
+    public ISideMovement currentSideMovement;
     public GameObject startingSide;
     public GameObject currentSide;
     public float speed = 1f;
@@ -23,10 +24,8 @@ public class Evils : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (followingPlayer)
-        {
-            FollowPlayer();
-        }
+
+        FollowPlayer();
 
 
         Move();
@@ -76,7 +75,9 @@ public class Evils : MonoBehaviour {
 
         if (onSamePlatform)
         {
-
+            followingPlayer = true;
+            var relativeDirection = LeftOrRight.GetRelativeDirection(player.gameObject, gameObject);
+            directionOfMovement = relativeDirection;
         }
         
     }
