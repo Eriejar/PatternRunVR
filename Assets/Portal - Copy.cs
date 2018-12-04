@@ -18,6 +18,7 @@ public class Portal : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         Player thingWithSide = other.gameObject.GetComponent<Player>();
+
         var newPosition = Destination.GetPosition();
         // Preserving y axis position upon teleportation
         newPosition.y = thingWithSide.transform.position.y;
