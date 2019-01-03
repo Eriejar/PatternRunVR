@@ -8,6 +8,7 @@ public class Evils : MonoBehaviour {
     [HideInInspector]
     public ISideMovement currentSideMovement;
     public GameObject startingSide;
+    [HideInInspector]
     public GameObject currentSide;
     public float speed = 1f;
     private bool patrolMode = true;
@@ -31,6 +32,7 @@ public class Evils : MonoBehaviour {
         Move();
 	}
 
+
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Evil Triggered");
@@ -45,6 +47,12 @@ public class Evils : MonoBehaviour {
         if (cube != null && followingPlayer == false)
         {
             ReverseDirection();
+        }
+
+        if (other.gameObject.tag == "Bullet")
+        {
+            KillEvil();
+            Destroy(other.gameObject);
         }
         
     }
@@ -91,13 +99,6 @@ public class Evils : MonoBehaviour {
         return false;
     }
 
-
-
-    void SetMovementDirectionToPlayerSide()
-    {
-       
-    }
-
     void ReverseDirection()
     {
         if (directionOfMovement == "left")
@@ -110,21 +111,18 @@ public class Evils : MonoBehaviour {
         }
     }
 
-    void InitialPatrolMovement()
+
+    void FindStartingSide()
     {
+        RaycastHit hit;
+        Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit);
 
     }
 
-
-
-
-    void Patrol()
+    public void KillEvil()
     {
-
-
+        Destroy(this.gameObject);
     }
-
-
 
 
 }

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - TurnBox
+  - Bullet
   layers:
   - Default
   - TransparentFX
